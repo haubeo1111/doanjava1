@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Thống Kê Số Hàng </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      
+    </head>
+    <body>
+         <article layout:fragment="content" >
+        <div class="container">
+            <h2 th:text="${ten}"></h2>
+           
+            	<div class="content">
+			
+			<form th:action="${ngay}" >
+		<label>Ngày Đầu</label>
+		<input type="text" name="ngaydau" th:value="${ngaydau}" id="ngaydau" placeholder="ngay //thang//nam" >
+		<label>Ngày Cuối</label>
+		<input type="text" name="ngaycuoi" th:value="${ngaycuoi}" id="ngaycuoi" placeholder="ngay // thang // nam">
+		<button type="submit">nhan day</button>
+		</form>
+		</div>
+             <th:block th:if="${#lists.isEmpty(thongke)}">
+			<h3>Không Có Danh Sách Thống Kê</h3>
+		</th:block>
+
+		 <th:block th:unless="${#lists.isEmpty(thongke)}">
+		<nav class="row justify-content-center wow fadeIn"
+		data-wow-delay="0.2s">
+		<div class="row">
+		<form action="#">
+	<div class="row"></div>
+            <table border="1"  width="945" height="auto">
+                     <caption align="top"  class="title" style="color:green;">Danh Sách Thống Kê</caption>
+                <thead>
+                    <tr>
+                    <th>count</th>
+                  
+                   
+                    
+                     <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng </th>
+					
+					
+					
+					
+                        
+                       
+                       
+                        
+                            </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr th:each="contact,iterStat : ${thongke}">
+							<td th:text="${iterStat.count}"></td>
+							
+				
+						
+							<td th:text="${contact.name}"></td>
+							<td th:text="${contact.soluong}"></td>
+							
+					
+								
+							
+								
+									
+							
+									
+						</tr>
+					</tbody>
+				</table>
+				</form>
+			</div>
+		</nav>
+			
+		  </th:block>
+	</div>
+                    
+                  
+
+
+       
+        </article>
+    </body>
+</html>

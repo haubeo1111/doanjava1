@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSP Page</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="../../css/layoutc.css" />
+  
+</head>
+<body>
+  <div id="wrapper">
+            <header >
+              
+        <input  class="form-control1" type="text" placeholder="Ban tim gi..."  >     
+             
+                    
+              </header>
+         <div id="main-content">
+         <nav >
+        
+         </nav>
+  <article layout:fragment="content" >
+	
+	
+		          
+		 <div  th:each="item:${list1}">
+		 <th:block th:if="${l==1 }">
+				<h3 th:text="${item.name}">Nguyen Van Nam</h3>
+				</th:block>
+				 <th:block th:if="${l==3}">
+				<h3 th:text="${item.tenpk}">Nguyen Van Nam</h3>
+				</th:block>
+				<p class="ii">
+				
+					<img alt="" th:src="@{'/getimage/'+${aa}}" >
+					</p>
+					<div class="kk">
+					<th:block th:if="${l==1 }">
+					<div ><del><p style="color:red ;font-family:35px" th:text="${tienban}+d"></p></del></div>
+			   <p  style="color:red" th:text="${tienthuc}+d"></p>
+			   </th:block>
+			   <th:block th:if="${l==3 }">
+			   <div ><p style="color:red ;font-family:35px" th:text="${tienban}+d"></p></div>
+			   </th:block>
+					<p class="icon1" >Tra gop 0%</p>
+					
+					
+					<div class="gg">
+					<p th:text="${item.ngaynhap}" class="btnd">2012-12-12</p>
+					<p th:text="${item.soluong}" class="btnd" >0905</p>
+					 <th:block th:if="${l==1 }">
+					<p th:text="${item.madt}" style="color:red ;font-family:15px" >2000.0</p>
+					</th:block>
+					 <th:block th:if="${l==3 }">
+					<p th:text="${item.mapk}" style="color:red ;font-family:15px" >2000.0</p>
+					</th:block>
+					 <p >Tặng Kèm</p>
+					<div th:each="tk:${tentk}">
+					<ul class="list-group" id="myList">
+    <li class="list-group-item" th:text="${tk}"></li>
+    
+  </ul>  
+                   
+                    </div>
+					
+					
+					
+					<p class="tt"><a class="btn btn-primary btn-sm"
+						th:href="@{'/cuahang/mua/'+${item.id}}">Buy</a> 
+						</p>
+				</div></div>
+			</div>
+</form>
+	</article>
+	</div>
+       
+            <div class="clear" ></div>
+            <footer style="text-align:center;text-transform: uppercase;">Giới thiệu về công ty
+
+</footer>
+            </div>
+	
+    </body>
+    </html>
+

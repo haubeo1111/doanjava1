@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Danh Sách Nhân Viên</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+</head>
+<body>
+  <article layout:fragment="content" >
+	<div class="container">
+		<h2>Danh Sách Nhân Viên</h2>
+		<p>
+			<a class="btn btn-primary" href="/nhanvien/">Thêm Mới Nhân Viên</a>
+		</p>
+		
+		<table width="945" height="auto">
+		 <caption align="top"  class="title" style="color:green;">Danh Sách Nhân Viên </caption>
+			<thead>
+				<tr>
+					<th>Photo</th>
+					<th>ID</th>
+					<th>Tên Nhân Viên</th>
+					<th>Địa Chỉ</th>
+					<th>Số Điên Thoại</th>
+					<th>Ngày Sinh</th>
+					<th>Giới Tính</th>
+					<th>Bằng cấp</th>
+					<th>Mã Nhân Viên</th>
+					<th>Chức vụ</th>
+					<th>Sửa</th>
+					<th>Xóa</th>
+					<th>Xóa Nhiều</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item:${list1}">
+				<form action="/nhanvien/edit" th:object="${dto}" method="post" enctype="multipart/form-data">
+					<td width="100" >
+					<img alt="" th:src="@{'/getimage/'+${item.image}}" width="80" height="70">
+					<input type="file" th:field="*{image}" ><input type="hidden" th:value="${item.image}" name="image1">
+					</td>
+					<input type="hidden" th:value="${item.id}"name="id" >
+					<td th:text="${item.id}">nv1</td>
+					<td ><input type="text"  th:value="${item.name}"  name="name"  ></td>
+					<td ><input type="text" th:value="${item.address}" name="address" ></td>
+					<td ><input type="text" th:value="${item.phone}"  name="phone"></td>
+					<td ><input type="text" th:value="${item.birthday}" name="birthday"></td>
+					<td ><input type="number" th:value="${item.gender}"   name="gender"></td>
+					<td ><input type="text" th:value="${item.degree}" name="degree"></td>
+					<td ><input type="text" th:value="${item.manv}" name="manv"></td>
+					<td ><input type="number" th:value="${item.chucvu}" name="chucvu"></td>
+					<td><button type="submit" >Sửa</button>
+						</td>
+						
+					<td> <button type="submit" >Xóa</button></td>
+				<input type="checkbox" th:field="{isdelete}"  >
+                 </form>
+              
+				</tr>
+			
+				
+				
+			
+				
+
+			</tbody>
+		</table>
+		
+		<form>
+		 <a href="/nhanvien/tiep" class="btn btn-primary">Tiếp</a><input type="number" th:value="${toi}"> <a href="/nhanvien/lui" class="btn btn-primary">lui</a>
+		</form>
+	</div>
+	</article>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Danh Sách Sản Phẩm Xuất Kho</title>
+       
+    </head>
+    <body>
+         <article layout:fragment="content" >
+        <div class="container">
+            <h2>Danh Sách Sản Phẩm Xuất Kho</h2>
+           <!--  <a th:href="@{'/employee/'}" class="btn btn-primary">Add Users</a>-->
+          <!-- <div th:if="${success}"
+			class="row alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+			<span th:text="${success}"></span>
+		</div>-->
+            	
+            	
+			<div class="container" >
+			
+			</div>
+		
+             <th:block th:if="${#lists.isEmpty(xuatkho)}">
+			<h3>Không có Sản Phẩm Xuất Kho</h3>
+		</th:block>
+
+		 <th:block th:unless="${#lists.isEmpty(xuatkho)}">
+		<nav class="row justify-content-center wow fadeIn"
+		data-wow-delay="0.2s">
+		<div class="row">
+		
+	<div class="row">	<a th:href="@{'/DienThoai/page'}" class="btn btn-success pull-left"> List Users </a></div>
+            <table border="1"  width="945" height="auto">
+                     <caption align="top"  class="title" style="color:green;"> List Users </caption>
+                <thead>
+                    <tr>
+                    <th>count</th>
+                    <th>Hình Ảnh</th>
+                    <th>id</th>
+                    
+                        <th>Tên Sản Phẩm</th>
+                   
+					<th>Ngày Xuất</th>
+					<th>Số Lượng</th>
+					<th>Giá Bán</th>
+					
+					
+					
+                       
+                       
+                        
+                            </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr th:each="contact,iterStat : ${xuatkho}">
+							<td th:text="${iterStat.count}"></td>
+							<td width="100" >
+					<img alt="" th:src="@{'/getimage/'+${contact.photo}}" width="80" height="70"></td>
+							<td th:text="${contact.product}"></td>
+							<td th:text="${contact.name}"></td>
+							
+							<td th:text="${contact.ngaydat}"></td>
+							<td th:text="${contact.quantity}"></td>
+						
+							<td th:text="${contact.price}"></td>
+								
+							
+					<!-- <td th:text="${chucvu.get(contact.chucvuid).getTencv()}"></td>-->
+									
+							
+									
+						</tr>
+					</tbody>
+				</table>
+				 <a href="/cuahang/savexuatkho" class="btn btn-primary">Lưu Phiếu</a>
+			</div>
+		
+	</nav>
+	
+			
+		  </th:block>
+	</div>
+                    
+                  
+
+
+       
+        </article>
+    </body>
+</html>

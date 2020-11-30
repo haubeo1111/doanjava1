@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+    <meta charset="ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+        <title>Đăng ký Điện Thoại Xuất Kho</title>
+    </head>
+    <body>
+      <article layout:fragment="content" >
+     
+                 <div class="container" style="margin-top: 10px;">
+            <div class="row" style="border: 1px darkgrey solid; border-radius: 10px;width: 50%; margin: 0 50px; padding: 20px;" >
+                <div class="col-sm-12">
+        <h2>Đăng ký Điện Thoại Xuất Kho</h2>
+         
+          <form th:action="${action}"   th:object=${dto} method="post" enctype="multipart/form-data" >
+          
+                      
+                             <a href="/DienThoaiXK/savepnk" class="btn btn-primary">luu phieu</a>
+                            <input type="hidden"  th:field="*{id}" class="form-control " name="id" value="" placeholder="Enter id">
+                        <div class="form-group">
+                            <label>Tên Phiếu Xuất Kho</label> 
+                             <select th:field="*{maxk}" class="form-control" id="categorieid" name="maxk">
+							<option  th:each="depart:${phieuxuatkho}" th:value="${depart.id}" th:text="${depart.tenphieu}"
+							th:if="${depart.id==xk}" selected="selected"
+							></option>
+							<option  th:each="depart:${phieuxuatkho}" th:value="${depart.id}" th:text="${depart.tenphieu}"
+							th:if="${depart.id!=xk}" 
+							></option>
+						</select>
+                        </div>
+                         <div class="form-group">
+                      
+                            <label>Tên điện thoại Xuất Kho</label>
+                            <input type="text"  th:field="*{name}" class="form-control" name="name" value="" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Mã Điện thoại</label>
+                              <input type="text"  th:field="*{madt}" class="form-control" name="madt" value="" placeholder="Enter madt">
+                        </div>
+                        <div class="form-group">
+                            <label>số lượng</label>
+                            <input type="number" class="form-control"   th:field="*{soluong}" name="soluong" value="" placeholder="Enter soluong">
+                        </div>
+                        <div class="form-group">
+                            <label>ngày xuất:</label>
+                            <input type="text"  th:field="*{ngayxuat}" class="form-control" name="ngayxuat" value="" placeholder="Enter ngay xuat">
+                        </div>
+
+                       
+                         <div class="form-group">
+                            <label>giá bán</label>
+                            <input type="number" class="form-control"   th:field="*{giaban}" name="giaban" value="" placeholder="Enter giaban">
+                        </div>
+                        
+                        <div class="form-group">
+						<label>Hình Ảnh</label> <input type="file" th:field="*{hinhanh}" class="form-control" name="hinhanh" placeholder="Enter hinhanh" id="image">
+					</div>
+					<div class="form-group">
+                            <label>Loại Diện Thoại</label>
+                           <select th:field="*{maloaidt}" class="form-control" id="categorieid" name="maloaidt">
+							<option  th:each="depart:${loaidt}" th:value="${depart.maloaidt}" th:text="${depart.tenloaidt}"></option>
+							
+						</select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lưu Lại</button>
+                        <button type="reset" class="btn btn-danger btn-sm">Hủy bỏ</button>
+                        <a href="/DienThoaiXK/page" class="btn btn-primary">Danh Sách Diện Thoại Xuất Kho</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </article>
+    </body>
+</html>

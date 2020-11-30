@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>Hóa Đơn</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layouth.css" />
+</head>
+<body>
+<div id="wrapper">
+            <header >
+       
+                    
+              </header>
+         <div id="main-content">
+         <nav >
+       
+         </nav>
+          <article layout:fragment="content" >
+	<div class="container">
+		<h2>Hóa Đơn Khách Hàng</h2>
+		 <div class="ii">          
+	 <form th:action="${action}"  th:object=${customer} method="post">
+                        
+                         <div class="form-group">
+                           
+                            <input type="hidden"  th:field="*{id}" class="form-control" name="customerid" value="" placeholder="Enter customerid">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên Khách Hàng</label>
+                            <input type="text"  th:field="*{name}" class="form-control" name="name" value="" placeholder="Enter Name">
+                        </div>
+                        
+						<div class="form-group">
+						 <input type="hidden"
+							class="form-control" name="dto" th:field="*{dto}"
+							placeholder="Enter dto" id="dto" value="">
+					</div>
+					<div class="form-group">
+						<label>Email</label> <input type="text" class="form-control" th:field="*{email}"name="email" placeholder="Enter email" id="email" value="">
+					</div>
+					<div class="form-group">
+						<label>Số Điện Thoại</label> <input type="text" class="form-control"th:field="*{phone}" name="phone" placeholder="Enter phone" id="phone" value="">
+					</div>
+                        
+                        
+                     
+					<div class="form-group">
+						<label>Giới Tính</label>
+						<div class="radio">
+							<!--value = 1 => Nam| 0 =>Nu -->
+							<label class="checkbox-inline"> <input type="radio" th:field="*{gender}"
+								name="gender" value="1" id="gender1">Male
+							</label> 
+							<label class="checkbox-inline"> <input type="radio" th:field="*{gender}"
+								name="gender" checked="checked" value="0" id="gender2">Female
+							</label>
+							<label class="checkbox-inline"> <input type="radio" th:field="*{gender}"
+								name="gender" checked="checked" value="2" id="gender2">Không Biết
+							</label>
+						</div>
+					</div>
+
+                        
+                        <button type="submit" class="btn btn-primary">Nhấn Đây</button>
+                        <button type="reset" class="btn btn-primary">Hủy</button>
+                        
+			
+				
+			</form>
+			<br>
+			
+				
+</div><div th:each="item:${list1}" class="kk">
+<p ><img alt="" th:src="@{'/getimage/'+${item.photo}}" width="80" height="70"></p>
+<p th:text="${item.name}"></p>
+<p th:text="${item.price}"></p>
+<p th:text="${item.quantity}"></p>
+</div>
+		
+	</div>
+	<form action="/cuahang/thanhtoan" th:object="${tongtien}">
+		<h1><p > Tổng Tiền Là  :</p>	<input type="number" name="tongtien" th:field="*{tien}"></h1>
+				<!-- <button type="submit" class="btn btn-primary">thanhtoan</button>-->
+				</form>
+	</article>
+	</div>
+       
+            <div class="clear" ></div>
+            <footer style="text-align:center;text-transform: uppercase;">Giới thiệu về công ty
+
+</footer>
+            </div>
+</body>
+</html>

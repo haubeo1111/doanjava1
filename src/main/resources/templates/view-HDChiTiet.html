@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Danh Sách Hóa Đơn Chi Tiết</title>
+       
+    </head>
+    <body>
+         <article layout:fragment="content" >
+        <div class="container">
+            <h2>Danh Sách Hóa Đơn Chi Tiết</h2>
+           <!--  <a th:href="@{'/employee/'}" class="btn btn-primary">Add Users</a>-->
+          <!-- <div th:if="${success}"
+			class="row alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+			<span th:text="${success}"></span>
+		</div>-->
+            	<div class="row">
+			<a th:href="@{'/HDChiTiet/'}" class="btn btn-success pull-left">
+				<span class="glyphicon glyphicon-plus"></span>Thêm Mới Hóa Đơn Chi Tiết
+			</a>
+			<form class="form-inline pull-right" action="#"
+				th:action="@{/HDChiTiet/search}" method="GET">
+				<div class="form-group">
+					<input type="text" class="form-control" onkeydown="" id="" name="s"
+						placeholder="Type customer name..." />
+						
+				</div>
+				<button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+			</form>
+		</div>
+             <th:block th:if="${#lists.isEmpty(employees.pageList)}">
+			<h3>Không Có Danh Sách Hóa Đơn Chi Tiết</h3>
+		</th:block>
+
+		 <th:block th:unless="${#lists.isEmpty(employees.pageList)}">
+		<nav class="row justify-content-center wow fadeIn"
+		data-wow-delay="0.2s">
+		<div class="row">
+		<form action="/HDChiTiet/xoanhieu">
+	<div class="row">	<a th:href="@{'/HDChiTiet/page'}" class="btn btn-success">Danh Sách Hóa Đơn Chi Tiết</a></div>
+            <table border="1"  width="945" height="auto">
+                     <caption align="top"  class="title" style="color:green;">Danh Sách Hóa Đơn Chi Tiết</caption>
+                <thead>
+                    <tr>
+                    <th>count</th>
+                  
+                    <th>id</th>
+                    
+                        <th>Số Lượng </th>
+                    <th>Giá Cả</th>
+					
+					
+						<th>Sản phẩm</th>
+					<th>Tình Trạng</th>
+					<th>Ngày Đặt</th>
+					<th>Sửa</th>
+					<th>Xóa</th>
+					
+					<th><button type="submit">Xóa Nhiều</button></th>
+                        
+                       
+                       
+                        
+                            </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr th:each="contact,iterStat : ${employees.pageList}">
+							<td th:text="${iterStat.count}"></td>
+							
+				
+							<td th:text="${contact.id}"></td>
+							<td th:text="${contact.soluong}"></td>
+							<td th:text="${contact.price}"></td>
+							
+					        <td><th:block th:each="sanpham:${dienthoai}">
+					        <p th:if="${contact.sanphamid==sanpham.id}" th:text="${sanpham.name}"></p>
+					        </th:block>
+					         <th:block th:each="sanpham:${phukien}">
+					        <p th:if="${contact.sanphamid==sanpham.id}" th:text="${sanpham.tenpk}"></p>
+					        </th:block>
+					        </td>
+					       
+							<td>
+							<select  class="form-control"  name="tinhtrang">
+							<th:block th:if="${contact.tinhtrang==1}"><option   value="1" selected="selected">Chưa giao hàng</option>
+							<option   value="2">Đang Giao Hàng</option>
+							<option   value="3">Đã Giao Hàng</option>
+							</th:block>
+							<th:block th:if="${contact.tinhtrang==2}"><option   value="2" selected="selected">Đang Giao Hàng</option>
+							<option   value="3">Đã Giao Hàng</option>
+							<option   value="1" >Chưa giao hàng</option>
+							</th:block>
+							<th:block th:if="${contact.tinhtrang==3}"><option   value="3" selected="selected">Đã Giao Hàng</option>
+							<option   value="2">Đang Giao Hàng</option>
+							<option   value="1" >Chưa giao hàng</option>
+							</th:block>
+						</select>
+							</td>	
+							<td th:text="${contact.ngaydat}"></td>
+								
+									
+							<td><a th:href="@{'/HDChiTiet/edit/'+${contact.id}}"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+							<td><a th:href="@{'/HDChiTiet/delete/'+${contact.id}}"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
+									<td><input type="checkbox" name="xoa[]" th:value="${contact.id}" ></td>
+									
+						</tr>
+					</tbody>
+				</table>
+				</form>
+			</div>
+		<ul class="pagination">
+			<li
+				th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+				<a class="page-link" th:href="@{/HDChiTiet/page}">First</a>
+			</li>
+			<li
+				th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+				<a class="page-link" aria-label="Previous"
+				th:href="@{|${baseUrl}${currentIndex - 1}|}"
+				title='Go to previous page'><span aria-hidden="true">«</span>
+					<span class="sr-only">Previous</span></a>
+			</li>
+			<li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+				th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+				<a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
+					th:text='${item}'>1</span>
+			</a>
+			</li>
+			<li
+				th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+				<a class="page-link" aria-label="Next"
+				th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span
+					aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
+			</li>
+			<li
+				th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+				<a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+			</li>
+		</ul>
+	</nav>
+	<!--  <form class="form-inline pull-right" action="#"
+				th:action="@{/HDChiTiet/search/pageNumber}" method="GET">
+				<div class="form-group">
+					<input type="text" class="form-control" onkeydown="" id="" name="sa"
+						placeholder="Type employee name..." />
+						
+				</div>
+				<button type="submit" class="btn btn-primary">Search</button>
+			</form>-->
+			
+		  </th:block>
+	</div>
+                    
+                  
+
+
+       
+        </article>
+    </body>
+</html>

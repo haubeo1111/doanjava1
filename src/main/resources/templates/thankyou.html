@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layouth.css" />
+</head>
+<body>
+<div id="wrapper">
+            <header >
+              
+        <input  class="form-control1" type="text" placeholder="Ban tim gi..."  >     
+              <ul>
+                    <li><a href="/product/mobi">Iphone</a></li>
+                    <li><a href="/product/laptop">LapTop</a></li>
+                    <li><a href="/product/tablet">Tablet</a></li>
+                    <li><a href="/product/phukien">PhuKien</a></li>
+                    <li><a href="/product/hoidap">Hoidap</a></li>
+                     </ul>
+              
+                <img alt="" width="600" height="300"   th:src="@{'/getimage/oppo.png'}"> 
+                    
+              </header>
+         <div id="main-content">
+         <nav >
+         <img alt="" th:src="@{'/getimage/nav.gif'}">
+         </nav>
+          <article layout:fragment="content" >
+	<div class="container">
+	<h1>Cam on ban </h1><h1 th:text="${ten}"></h1> <h1> da mua hang cua chung toi</h1>
+	</div>
+</body>
+</html>

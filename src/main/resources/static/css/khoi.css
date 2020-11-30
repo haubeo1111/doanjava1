@@ -1,0 +1,32 @@
+@charset "ISO-8859-1";
+#wrapper{
+    width:100%;
+    height: auto;
+   margin: 0 auto;
+ }
+header{
+    width:100%;
+    height:auto; 
+    background-color:bisque;
+    position: relative;
+}
+#main-content{
+    width: 100%;
+    height:auto;
+  float:left;
+ 
+}
+article{
+    width:70%;
+    height:100%; 
+   
+    float: left;
+   
+}
+aside{
+    width: 29%;
+    height: auto;  
+  
+    float: left;
+   
+}

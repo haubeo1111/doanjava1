@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/main-layout1}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Danh Sách Bảng Chấm Công</title>
+
+
+</head>
+<body>
+	<article layout:fragment="content">
+		<div class="container">
+			<h2>Danh Sách Bảng Chấm Công</h2>
+			
+
+
+			<form action="/BangChamCong/ngay">
+				<label>ngày chấm</label> 
+				
+				<input type="text" class="form-control"
+					name="ngaycham" th:value="${ngay}" id="ngay"
+					placeholder="Enter ngay/thang/nam">
+					<Button type="submit" class="btn btn-primary">Submit</Button>
+					</form>
+					<form th:action="${action}" method="post" id="formngay">
+					<input type="hidden" class="form-control"
+					name="ngaycham" th:value="${ngay}" id="ngay"
+					placeholder="Enter ngay/thang/nam">
+				<table border="1" width="945" height="auto">
+					<caption align="top" class="title" style="color: green;">
+						Danh Sách Bảng Chấm Công</caption>
+					<thead>
+						<tr>
+							<th>count</th>
+
+
+							<th>nhân viên id</th>
+							<th>tên nhân viên</th>
+
+							<th>chức vụ</th>
+
+							<th>Đi làm</th>
+							<th>Không Đi Làm</th>
+                              <th>Biểu Hiện Đi Làm</th>
+							<th>Lý Do Không Đi Làm</th>
+							<th>Tăng Ca</th>
+
+
+
+
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr th:each="nv,iterStat : ${nhanvien}">
+							<td th:text="${iterStat.count}"></td>
+							<td><input type="number" name="id" th:value="${nv.id}"></td>
+							<td th:text="${nv.name}"></td>
+							<td th:each="cv:${chucvu}" th:if="${nv.chucvuid==cv.id}"
+								th:text="${cv.tencv}"></td>
+								
+                         <td><input type="checkbox"   name="dilam"  th:value="${nv.id}" th:id="${nv.id}" checked onclick="check(this)"></td>
+                            <td><input type="checkbox"   name="khongdilam"  th:value="${nv.id}" th:id="${nv.id}+k" onclick="check1(this)" ></td>
+							<!-- <td ><input type="checkbox" name="dilam" th:value="${nv.id}" th:id="${nv.id}+dl" onclick="check()"></td>
+							<td ><input type="checkbox" name="khongdilam" th:value="${nv.id}" th:id="${nv.id}+kdo" onclick="check()"></td>
+						  <td ><input type="checkbox" name="dilam" th:value="${nv.id}" th:id="${nv.id}+dl" onclick="check(this)"></td>
+							<td ><input type="checkbox" name="khongdilamkp" th:value="${nv.id}" th:id="${nv.id}+kdo" onclick="check1(this)"></td>
+							  <td ><input type="checkbox" name="khongdilamcxp" th:value="${nv.id}" th:id="${nv.id}+kdx" onclick="check2(this)"></td>
+							<td ><input type="checkbox" name="khongdilamcpn" th:value="${nv.id}" th:id="${nv.id}+kdc" onclick="check3(this)"></td>
+					        <td ><input type="checkbox" name="dentrevesom" th:value="${nv.id}" th:id="${nv.id}+dt" onclick="check4(this)"></td>-->
+							<td><a th:href="@{'/DiLam/data/'+${nv.id}}"><span
+									class="glyphicon glyphicon-pencil"></span></a>bieu hien dilam</td>
+							<td><a th:href="@{'/KhongDiLam/data/'+${nv.id}}"><span
+									class="glyphicon glyphicon-pencil"></span></a>ly do khong dilam</td>
+							<td><a th:href="@{'/TangCa/data/'+${nv.id}}"><span
+									class="glyphicon glyphicon-pencil"></span></a>tang ca</td>
+							<!--  <td><div th:each="ct : ${nhanvien}" ><p th:if="${contact.idnhanvien==ct.id}" th:text="${ct.name}">
+	</p>
+	</div></td>-->
+							<!--<td><div th:each="ct : ${nhanvien}"><th:block th:if="${contact.idnhanvien==ct.id}">
+	<a th:each="cv:${chucvu}"  th:if="${ct.chucvuid==cv.id}" th:text="${cv.tencv}"></a>
+	</th:block></div></td>-->
+
+
+
+
+						</tr>
+					</tbody>
+				</table>
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-danger btn-sm">Cancel</button>
+				<a href="/BangChamCong/view" class="btn btn-primary">
+				Danh sách Bảng Chấm Công</a>
+			</form>
+		</div>
+
+
+		<!--  <form class="form-inline pull-right" action="#"
+				th:action="@{/BangChamCong/search/pageNumber}" method="GET">
+				<div class="form-group">
+					<input type="text" class="form-control" onkeydown="" id="" name="sa"
+						placeholder="Type BangChamCong name..." />
+						
+				</div>
+				<button type="submit" class="btn btn-primary">Search</button>
+			</form>-->
+
+
+
+
+
+
+
+
+
+		<script th:inline="javascript">
+		function check(mm){
+			var kd=mm.value+"k";
+			var d=mm.value;
+			if(mm.onclick){
+				document.getElementById(d).checked =true;
+		   		document.getElementById(kd).checked =false;
+			}
+		}
+		function check1(mm){
+			var kd=mm.value+"k";
+			var d=mm.value;
+			if(mm.onclick){
+				document.getElementById(kd).checked =true;
+		   		document.getElementById(d).checked =false;
+			}
+		}
+		/*function get() {
+			var ngaytru=document.forms["formngay"]["ngay"].value;
+			 var date = new Date(ngaytru);
+		}
+			/*  var i=0;
+			  var nv=[[${nhanvienid}]];
+			  // for(i=0;nv.length;i++){
+			  // 	var mm=nv[i]+"dl";
+			  // 	alert(mm);
+			 //  }
+			   function check(mm){
+			   	var dl=mm.value+"dl";
+				var kdo=mm.value+"kdo";
+				var kdx=mm.value+"kdx";
+				var kdc=mm.value+"kdc";
+				var dt=mm.value+"dt";
+				
+			   	if(mm.checked){
+			   		
+			   		document.getElementById(kdo).checked =false;
+			   		   document.getElementById(dt).checked =false;  
+			   		   document.getElementById(kdc).checked =false;
+			   		   document.getElementById(kdx).checked =false;
+			   		
+			   	}
+			   	
+			   		
+			        }
+			   function check1(mm){
+			   	var dl=mm.value+"dl";
+				var kdo=mm.value+"kdo";
+				var kdx=mm.value+"kdx";
+				var kdc=mm.value+"kdc";
+				var dt=mm.value+"dt";
+			   	if(mm.checked){
+			   		document.getElementById(dl).checked =false;
+			   		   document.getElementById(dt).checked =false;  
+			   		   document.getElementById(kdc).checked =false;
+			   		   document.getElementById(kdx).checked =false;
+			   		
+			   	}
+			   	
+			   		
+			        }
+			   function check2(mm){
+			   	var dl=mm.value+"dl";
+				var kdo=mm.value+"kdo";
+				var kdx=mm.value+"kdx";
+				var kdc=mm.value+"kdc";
+				var dt=mm.value+"dt";
+			   	if(mm.checked){
+			   		document.getElementById(kdo).checked =false;
+			   		   document.getElementById(dt).checked =false;  
+			   		   document.getElementById(kdc).checked =false;
+			   		   document.getElementById(dl).checked =false;
+			   		
+			   	}
+			   	
+			   		
+			        }
+			   function check3(mm){
+			   	var dl=mm.value+"dl";
+				var kdo=mm.value+"kdo";
+				var kdx=mm.value+"kdx";
+				var kdc=mm.value+"kdc";
+				var dt=mm.value+"dt";
+			   	if(mm.checked){
+			   		document.getElementById(kdo).checked =false;
+			   		   document.getElementById(dt).checked =false;  
+			   		   document.getElementById(dl).checked =false;
+			   		   document.getElementById(kdx).checked =false;
+			   		
+			   	}
+			   	
+			   		
+			        }
+			   function check4(mm){
+			   	var dl=mm.value+"dl";
+				var kdo=mm.value+"kdo";
+				var kdx=mm.value+"kdx";
+				var kdc=mm.value+"kdc";
+				var dt=mm.value+"dt";
+			   	if(mm.checked){
+			   		document.getElementById(kdo).checked =false;
+			   		   document.getElementById(dl).checked =true;  
+			   		   document.getElementById(kdc).checked =false;
+			   		   document.getElementById(kdx).checked =false;
+			   		
+			   	}
+			   	
+			   		
+			        }
+			 //  }
+			 /*  function check1(){
+			   	 for(i=0;nv.length;i++){
+			   			var dl=nv[i]+"dl";
+			       		var kdo=nv[i]+"kdo";
+			       		var kdx=nv[i]+"kdx";
+			       		var kdc=nv[i]+"kdc";
+			       		var dt=nv[i]+"dt";
+			if( document.getElementById(kdo).checked ==true){
+			  document.getElementById(dl).checked =false;
+			  document.getElementById(dt).checked =false;  
+			  document.getElementById(kdc).checked =false;
+			  document.getElementById(kdx).checked =false;
+			  }
+			   	 }
+			   }
+			   function check2(){
+			   	for(i=0;nv.length;i++){
+			   		var dl=nv[i]+"dl";
+			   		var kdo=nv[i]+"kdo";
+			   		var kdx=nv[i]+"kdx";
+			   		var kdc=nv[i]+"kdc";
+			   		var dt=nv[i]+"dt";
+			   	 if(  document.getElementById(kdx).checked ==true)
+			   	{
+			   		   document.getElementById(dl).checked =false;
+			   		   document.getElementById(dt).checked =false;  
+			   		   document.getElementById(kdc).checked =false;
+			   		   document.getElementById(kdo).checked =false;
+			   		   }
+			   	}
+			   	        }
+			   function check3(){
+			   	for(i=0;nv.length;i++){
+			   		var dl=nv[i]+"dl";
+			   		var kdo=nv[i]+"kdo";
+			   		var kdx=nv[i]+"kdx";
+			   		var kdc=nv[i]+"kdc";
+			   		var dt=nv[i]+"dt";
+			   	  if( document.getElementById(kdc).checked ==true){
+			   		   document.getElementById(dl).checked =false;
+			   		   document.getElementById(dt).checked =false;  
+			   		   document.getElementById(kdo).checked =false;
+			   		   document.getElementById(kdx).checked =false;
+			   		   }
+			   	}
+			   	        }
+			   function check4(){
+			   	var dl=nv[i]+"dl";
+				var kdo=nv[i]+"kdo";
+				var kdx=nv[i]+"kdx";
+				var kdc=nv[i]+"kdc";
+				var dt=nv[i]+"dt";
+			   	for(i=0;nv.length;i++){
+			       if(document.getElementById(dt).checked == true){
+			      document.getElementById(kdo).checked = false;
+			      document.getElementById(kdx).checked = false;
+			      document.getElementById(kdc).checked = false;
+			      document.getElementById(dl).checked = true ;
+			       }
+			   	}
+			          }*/
+		</script>
+	</article>
+</body>
+</html>

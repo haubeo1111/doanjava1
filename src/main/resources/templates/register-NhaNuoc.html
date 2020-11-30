@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+    <meta charset="ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+         
+        <title>Đăng Ký Quy Định Nhà Nước</title>
+    </head>
+    <body>
+      <article layout:fragment="content" >
+        <div class="container" style="margin-top: 10px;">
+            <div class="row" style="border: 1px darkgrey solid; border-radius: 10px;width: 50%; margin: 0 50px; padding: 20px;" >
+                <div class="col-sm-12">
+        <h2>Đăng Ký Quy Định Nhà Nước</h2>
+         
+          <form th:action="${action}"  th:object=${NhaNuoc} method="post" >
+           <div class="form-group">
+                      
+                          
+                            <input type="hidden"  th:field="*{id}" class="form-control" name="id" value="" placeholder="Enter id">
+                        </div>
+                         
+                         <div class="form-group">
+                      
+                            <label>Lương Cơ Bản</label>
+                            <input type="text"  th:field="*{luongcoban}" class="form-control" name="luongcoban" value="" placeholder="Enter luongcoban">
+                        </div>
+                       <div class="form-group">
+                      
+                            <label>Quỹ Đoàn</label>
+                            <input type="number"  th:field="*{quydoan}" class="form-control" name="quydoan" value="" placeholder="Enter quydoan">
+                        </div>
+                        <div class="form-group">
+                            <label>Bảo Hiểm Tai nạn:</label>
+                            <input type="number"  th:field="*{bhtainan}" class="form-control" name="bhtainan" value="" placeholder="Enter bhtainan">
+                        </div>
+							<div class="form-group">
+                            <label>Bảo Hiểm Y tế</label>
+                             <input type="number"  th:field="*{bhyte}" class="form-control" name="bhyte" value="" placeholder="Enter bhyte">
+                        </div>
+                        
+                        
+                        
+					
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-danger btn-sm">Cancel</button>
+                        <a href="/NhaNuoc/page" class="btn btn-primary">Danh Sách Quy Định Nhà nước</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </article>
+    </body>
+</html>

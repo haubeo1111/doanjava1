@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+    <meta charset="ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+        <title>Đăng Ký Hóa Đơn</title>
+    </head>
+    <body>
+      <article layout:fragment="content" >
+        <div class="container" style="margin-top: 10px;">
+            <div class="row" style="border: 1px darkgrey solid; border-radius: 10px;width: 50%; margin: 0 50px; padding: 20px;" >
+                <div class="col-sm-12">
+        <h2>Đăng Ký Hóa Đơn</h2>
+         
+          <form th:action="${action}"  th:object=${hoadon} method="post" >
+           <div class="form-group">
+                      
+                        
+                            <input type="hidden"  th:field="*{id}" class="form-control" name="id" value="" placeholder="Enter id">
+                        </div>
+                         
+                         <div class="form-group">
+                      
+                            <label>status</label>
+                            <input type="text"  th:field="*{status}" class="form-control" name="status" value="" placeholder="Enter status">
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>Ngày Tạo:</label>
+                            <input type="text"  th:field="*{createddate}" class="form-control" name="createddate" value="" placeholder="Enter createddate">
+                        </div>
+							<div class="form-group">
+                            <label>Khách Hàng ID</label>
+                           <select th:field="*{customerid}" class="form-control"  name="customerid">
+							<option  th:each="depart:${customer}" th:value="${depart.id}" th:text="${depart.name}"></option>
+							
+						</select>
+                        </div>
+                        
+                        
+                        
+					
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-danger btn-sm">Cancel</button>
+                        <a href="/hoadon/page" class="btn btn-primary">Danh Sách Hóa Đơn</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </article>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+    <meta charset="ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     
+         
+        <title>Đăng ký phụ Cấp</title>
+    </head>
+    <body>
+      <article layout:fragment="content" >
+        <div class="container" style="margin-top: 10px;">
+            <div class="row" style="border: 1px darkgrey solid; border-radius: 10px;width: 50%; margin: 0 50px; padding: 20px;" >
+                <div class="col-sm-12">
+        <h2>Đăng ký phụ Cấp</h2>
+         
+          <form th:action="${action}"  th:object=${PhuCap} method="post" >
+            
+                        
+                       
+                        <div class="form-group">
+                            <label>Tên phụ cấp </label>
+                             <input type="text"  th:field="*{tenphucap}" class="form-control" name="tenphucap" value="" placeholder="Enter tenphucap">
+                        </div>
+							 <div class="form-group">
+                            <label>Số Tiền phụ Cấp</label>
+                             <input type="text"  th:field="*{sotien}" class="form-control" name="sotien" value="" placeholder="Enter sotien">
+                        </div>
+                           <div class="form-group">
+                         <label>Chúc Vụ</label>
+                       <select th:field="*{idchucvu}" class="form-control" id="categorieid" name="idchucvu">
+							<option th:each="depart:${chucvu}"  th:value="${depart.id}"  th:text="${depart.tencv}">  </option>
+						   </select>
+                        </div>
+                         
+                         
+					
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="/TienLuong/" class="btn btn-primary">Tiền Lương</a>
+                        <a href="/PhuCap/page" class="btn btn-primary">Danh Sách phụ Cấp</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </article>
+    </body>
+</html>

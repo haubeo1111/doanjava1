@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Customerproduct</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layoutc.css" />
+</head>
+<body>
+<div id="wrapper">
+            <header >
+              
+        <input  class="form-control1" type="text" placeholder="Ban tim gi..."  >     
+             
+                    
+              </header>
+         <div id="main-content">
+         <nav >
+        
+         </nav>
+      <article layout:fragment="content" >
+	<div class="container">
+		<h2>Customer LIST ProductS</h2>
+		           
+	<p><a class="btn btn-primary btn-sm" href="/cuahang/">Buy Add product</a></p>
+	<div th:each="item:${list1}">
+		  <table width="945" height="auto">
+          
+                <thead>
+                
+                    <tr>
+                    <th>hinh anh</th>
+                  
+                       <th>Ten</th>
+                        <th>so luong</th>
+                            <th>price</th>
+                        
+                        <th>action</th>
+                            </tr>
+                </thead>
+                <tbody>
+				<tr  >
+					<td width="100" >
+					<img alt="" th:src="@{'/getimage/'+${item.photo}}" width="80" height="70">
+					</td>
+					
+						<td th:text="${item.name}" > </td>
+						<td th:text="${item.quantity}"></td>
+					<td th:text="${item.price}" > </td>
+					
+					
+					
+				
+					
+					<td><a class="btn btn-primary btn-sm"
+						th:href="@{'/cuahang/dele/'+${item.cartsdetail}}">Delete</a></td>
+						</tr> 
+						  </tbody>
+            </table>
+            <br>
+            <p>soluong</p>
+            <form th:action="${action}">
+            <input type="hidden" th:value="${item.cartsdetail}" name="cartsdetail">
+          <p>  <input type="number" th:value="${item.quantity}"  name="quantity" > <button type="submit" class="btn btn-primary">submit</button></p>
+          
+				</form>
+				</div>
+			<br>
+			<br>
+			
+			
+			<br>
+			<br>
+			
+			<form action="/cuahang/thanhtoan" th:object="${tongtien}">
+		<h1><p > Tong tien la  :</p>	<input type="number" name="tongtien" th:field="*{tien}"></h1>
+				<button type="submit" class="btn btn-primary">thanhtoan</button>
+				</form>
+			
+				
+
+		
+	</div>
+	</article>
+	</div>
+       
+            <div class="clear" ></div>
+            <footer style="text-align:center;text-transform: uppercase;">Giới thiệu về công ty
+
+</footer>
+            </div>
+</body>
+</html>

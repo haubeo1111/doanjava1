@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+    <meta charset="ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       
+        <title>Đăng Ký Tặng kèm Loại Điện Thoại</title>
+    </head>
+    <body>
+      <article layout:fragment="content" >
+        <div class="container" style="margin-top: 10px;">
+            <div class="row" style="border: 1px darkgrey solid; border-radius: 10px;width: 50%; margin: 0 50px; padding: 20px;" >
+                <div class="col-sm-12">
+        <h2>Đăng Ký Tặng kèm Loại Điện Thoại</h2>
+         
+          <form th:action="${action}"  th:object=${TKLoaiDT} method="post" enctype="multipart/form-data">
+           <div class="form-group">
+                      
+                            
+                            <input type="hidden"  th:field="*{id}" class="form-control" name="id"  placeholder="Enter id">
+                        </div>
+                         <div class="form-group">
+                      
+                            <label>Mã loại Điện Thoại</label>
+                            <select th:field="*{maloaidt}" class="form-control" id="categorieid" name="maloaidt">
+							<option  th:each="depart:${loaidt}" th:value="${depart.maloaidt}" th:text="${depart.tenloaidt}"></option>
+							
+						</select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày Bắt đầu</label>
+                            <input type="text"  th:field="*{ngaybatdau}" class="form-control" name="ngaybatdau" value="" placeholder="Enter ngaybatdau">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày Kết Thúc</label>
+                            <input type="text" class="form-control"   th:field="*{ngayketthuc}" name="ngayketthuc" value="" placeholder="Enter ngayketthuc">
+                        </div>
+                        <div class="form-group">
+                            <label>Tặng Kèm Sản phẩm:</label>
+                             <select th:field="*{idtangkem}" class="form-control" id="categorieid" name="idtangkem">
+							<option  th:each="depart:${tangkem}" th:value="${depart.id}" th:text="${depart.name}"></option>
+							
+						</select>
+                        </div>
+
+                       
+                        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-danger btn-sm">Cancel</button>
+                        <a href="/TKLoaiDT/page" class="btn btn-primary">Danh Sách Tặng kèm loại Điện Thoại</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </article>
+    </body>
+</html>

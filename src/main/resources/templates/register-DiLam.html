@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main-layout1}" >
+    <head>
+    <meta charset="ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+        <title>Đăng Ký Đi Làm</title>
+    </head>
+    <body>
+      <article layout:fragment="content" >
+        <div class="container" style="margin-top: 10px;">
+            <div class="row" style="border: 1px darkgrey solid; border-radius: 10px;width: 50%; margin: 0 50px; padding: 20px;" >
+                <div class="col-sm-12">
+        <h2>ĐĂng Ký Đi Làm</h2>
+         
+          <form th:action="${action}"  th:object=${DiLam} method="post" >
+           <div class="form-group">
+                      
+                          
+                            <input type="hidden"  th:field="*{id}" class="form-control" name="id" value="" placeholder="Enter id">
+                        </div>
+                         
+                         <div class="form-group">
+                      
+                            <label>Nhân Vien </label>
+                            <select th:field="*{idnhanvien}" class="form-control" id="categorieid" name="idnhanvien">
+							<option  th:each="depart:${employee}" th:value="${depart.id}" th:text="${depart.name}"></option>
+							
+						</select>
+                        </div>
+                       <div class="form-group">
+                            <label>Đi Trễ</label>
+                            <div class="radio"><!--value = 1 => Nam| 0 =>Nu -->
+                                <label class="checkbox-inline"><input type="radio"  th:field="*{ditre}" name="ditre"  value="0" checked >co</label>
+                                <label class="checkbox-inline"><input type="radio"  th:field="*{ditre}" name="ditre"  value="1">khong</label>
+ 	                       </div>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label>về Sớm</label>
+                            <div class="radio"><!--value = 1 => Nam| 0 =>Nu -->
+                                <label class="checkbox-inline"><input type="radio"  th:field="*{vesom}" name="vesom"  value="0" checked >co</label>
+                                <label class="checkbox-inline"><input type="radio"  th:field="*{vesom}" name="vesom"  value="1">khong</label>
+ 	                       </div>
+                        </div>
+                         <div class="form-group">
+                            <label>ƯU Tú</label>
+                            <div class="radio"><!--value = 1 => Nam| 0 =>Nu -->
+                                <label class="checkbox-inline"><input type="radio"  th:field="*{uutu}" name="uutu"  value="0" checked >co</label>
+                                <label class="checkbox-inline"><input type="radio"  th:field="*{uutu}" name="uutu"  value="1">khong</label>
+ 	                       </div>
+                        </div>
+					<div class="form-group">
+                            <label>Ngày Đi Làm:</label>
+                            <input type="text"  th:field="*{ngaydilam}" class="form-control" name="ngaydilam" value="" placeholder="Enter ngaydilam">
+                        </div>
+                        <div class="form-group">
+                            <label>Tình Trạng:</label>
+                            <input type="text"  th:field="*{tinhtrang}" class="form-control" name="tinhtrang" value="" placeholder="Enter tinhtrang">
+                        </div>
+                        <div class="form-group">
+                      
+                            <label>Số Tiền Cộng trừ</label>
+                            <input type="number"  th:field="*{sotien}" class="form-control" name="sotien" value="" placeholder="Enter sotien">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="/BangChamCong/" class="btn btn-primary">Bảng Chấm Công</a>
+                        <a href="/DiLam/page" class="btn btn-primary">Danh Sách Biểu Hiện Của Nhân Viên</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </article>
+    </body>
+</html>
